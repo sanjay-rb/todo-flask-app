@@ -14,4 +14,3 @@ app.config['SQLALCHEMY_DATABASE_URI'] = databse_uri
 db = SQLAlchemy(app)
 
 from app import routes, models
-# db.create_all()
