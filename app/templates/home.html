@@ -21,41 +21,211 @@
         <p><b>URL</b> : <a href="#">https://t0d0-flask-app.herokuapp.com/user/signup</a>
         </p>
         <h5>Input</h5>
-        <code><pre style="background: lightgrey;">
+        <code>
+            <pre style="background: lightgrey;">
 
             {
-                "name":"Sanjay",
-                "email":"sanjaybabu618@gmail.com"
-            }
-        </pre></code>
+                "name":"Test",
+                "email":"test@demo.com"
+            }      
+           </pre>
+        </code>
         <h5>Output</h5>
-        <code><pre style="background: lightgrey;">
+        <code>
+            <pre style="background: lightgrey;">
 
             {
-                "msg": "New user created : User(id=1, name=Sanjay, email=sanjaybabu618@gmail.com)",
+                "msg": "New user created : User(id=1, name=Test, email=test@demo.com)",
                 "user_id": 1
             }
-        </pre></code>
+            </pre>
+        </code>
         <hr>
         <hr>
+
+
+
         <h3>Delete User <button type="button" class="btn btn-primary">POST</button></h3>
         <br>
         <p><b>URL</b> : <a href="#">https://t0d0-flask-app.herokuapp.com/user/delete</a>
         </p>
         <h5>Input</h5>
-        <code><pre style="background: lightgrey;">
+        <code>
+            <pre style="background: lightgrey;">
 
             {
                 "user_id": 1
             }
-        </pre></code>
+            </pre>
+        </code>
         <h5>Output</h5>
-        <code><pre style="background: lightgrey;">
+        <code>
+            <pre style="background: lightgrey;">
 
             {
                 "msg": "User deleted : User(id=1, name=Sanjay, email=sanjaybabu618@gmail.com)"
             }
-        </pre></code>
+            </pre>
+        </code>
+        <hr>
+        <hr>
+
+
+
+        <h3>Add Todo <button type="button" class="btn btn-primary">POST</button></h3>
+        <br>
+        <p><b>URL</b> : <a href="#">https://t0d0-flask-app.herokuapp.com/todo/add</a>
+        </p>
+        <h5>Input</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "content":"Sample todo",
+                "due_date":"01-05-2022 13:30:01",
+                "is_completed":false,
+                "user_id":1
+            }
+            </pre>
+        </code>
+        <h5>Output</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "msg": "New todo added : Todo(id=1, content=Sample todo, due_date=01-05-2022 13:30:01, is_completed=False, user_id=1)",
+                "todo_id": 1
+            }
+            </pre>
+        </code>
+        <hr>
+        <hr>
+
+
+
+        <h3>List Todo <button type="button" class="btn btn-primary">POST</button></h3>
+        <br>
+        <p><b>URL</b> : <a href="#">https://t0d0-flask-app.herokuapp.com/todo/list</a>
+        </p>
+        <h5>Input</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "user_id":1
+            }
+            </pre>
+        </code>
+        <h5>Output</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "todos": [
+                    {
+                    "content": "Sample todo",
+                    "due_date": "01-05-2022 13:30:01",
+                    "id": 1,
+                    "is_completed": false,
+                    "user_id": 1
+                    }
+                ]
+            }
+            </pre>
+        </code>
+        <hr>
+        <hr>
+
+
+        <h3>Get Todo <button type="button" class="btn btn-success">GET</button></h3>
+        <br>
+        <p><b>URL</b> : <a href="#">https://t0d0-flask-app.herokuapp.com/todo/&lt;todo_id&gt;</a>
+        </p>
+        <h5>Input</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            None
+            </pre>
+        </code>
+        <h5>Output</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "msg": "Todo fetched successfully : Todo(id=1, content=Sample todo, due_date=01-05-2022 13:30:01, is_completed=False, user_id=1)",
+                "todo": {
+                    "content": "Sample todo",
+                    "due_date": "01-05-2022 13:30:01",
+                    "id": 1,
+                    "is_completed": false,
+                    "user_id": 1
+                }
+            }
+            </pre>
+        </code>
+        <hr>
+        <hr>
+
+
+        <h3>Update Todo <button type="button" class="btn btn-primary">POST</button></h3>
+        <br>
+        <p><b>URL</b> : <a href="#">https://t0d0-flask-app.herokuapp.com/todo/&lt;todo_id&gt;/update</a>
+        </p>
+        <h5>Input</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "content":"This is great",
+                "due_date":"09-04-2022 13:30:01",
+                "is_completed":true,
+                "user_id":1
+            }
+            </pre>
+        </code>
+        <h5>Output</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "msg": "Todo updated successfully : Todo(id=1, content=This is great, due_date=09-04-2022 13:30:01, is_completed=True, user_id=1)",
+                "todo": {
+                    "content": "This is great",
+                    "due_date": "09-04-2022 13:30:01",
+                    "id": 1,
+                    "is_completed": true,
+                    "user_id": 1
+                }
+            }
+            </pre>
+        </code>
+        <hr>
+        <hr>
+
+
+        <h3>Delete Todo <button type="button" class="btn btn-success">GET</button></h3>
+        <br>
+        <p><b>URL</b> : <a href="#">https://t0d0-flask-app.herokuapp.com/todo/&lt;todo_id&gt;/delete</a>
+        </p>
+        <h5>Input</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            None
+            </pre>
+        </code>
+        <h5>Output</h5>
+        <code>
+            <pre style="background: lightgrey;">
+
+            {
+                "msg": "Todo deleted : Todo(id=1, content=This is great, due_date=09-04-2022 13:30:01, is_completed=True, user_id=1)"
+            }
+            </pre>
+        </code>
+        <hr>
+        <hr>
     </div>
 </body>
 

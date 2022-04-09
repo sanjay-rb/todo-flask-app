@@ -39,7 +39,7 @@ def get(todo_id):
 
 
 
-@todo.route('/<int:todo_id>/delete', methods=['POST'])
+@todo.route('/<int:todo_id>/delete', methods=['GET'])
 def delete(todo_id):
     json_payload = {}
     delete_this_todo = Todo.query.filter(Todo.id == todo_id).first()
