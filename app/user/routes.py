@@ -12,14 +12,14 @@ def signup():
     if is_user_exist:
         json_payload["user_id"] = is_user_exist.id
         json_payload["msg"] = f"User already exist : {is_user_exist}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 200
     else:
         new_user = User(name=data["name"], email=data["email"])
         new_user.signup()
         new_user.commit()
         json_payload["user_id"] = new_user.id
         json_payload["msg"] = f"New user created : {new_user}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 200
 
 @user.route('/delete', methods=['DELETE'])
 def delete():
@@ -30,7 +30,7 @@ def delete():
         delete_this_user.delete()
         delete_this_user.commit()
         json_payload["msg"] = f"User deleted : {delete_this_user}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 200
     else:
         json_payload["msg"] = f"User not exist with id : {data['user_id']}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 404

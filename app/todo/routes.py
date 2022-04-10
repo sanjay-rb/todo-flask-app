@@ -13,7 +13,7 @@ def add():
     new_todo.commit()
     json_payload['todo_id'] = new_todo.id
     json_payload['msg'] = f"New todo added : {new_todo}"
-    return jsonify(json_payload)
+    return jsonify(json_payload), 200
 
 @todo.route('/list', methods=["GET"])
 def list():
@@ -25,10 +25,11 @@ def list():
         for todo in user.todos:
             json_payload['todos'].append(todo.toJson())
         json_payload['msg'] = f'Todos fetched from {user}'
+        return jsonify(json_payload), 200
     else:
         json_payload['todos'] = []
         json_payload['msg'] = f'User not exist with id {data["user_id"]}'
-    return jsonify(json_payload)
+        return jsonify(json_payload), 404
 
 @todo.route('/<int:todo_id>', methods=['GET'])
 def get(todo_id):
@@ -37,10 +38,10 @@ def get(todo_id):
     if todo:
         json_payload['todo'] = todo.toJson()
         json_payload['msg'] = f"Todo fetched successfully : {todo}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 200
     else:
         json_payload['msg'] = f"Todo not exist with id : {todo_id}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 404
 
 @todo.route('/<int:todo_id>/update', methods=['PUT'])
 def update(todo_id):
@@ -54,11 +55,11 @@ def update(todo_id):
         update_todo.commit()
         json_payload['todo'] = update_todo.toJson()
         json_payload['msg'] = f"Todo updated successfully : {update_todo}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 200
 
     else:
         json_payload["msg"] = f"Todo not exist with id : {todo_id}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 404
 
 
 @todo.route('/<int:todo_id>/delete', methods=['DELETE'])
@@ -69,8 +70,8 @@ def delete(todo_id):
         delete_this_todo.delete()
         delete_this_todo.commit()
         json_payload["msg"] = f"Todo deleted : {delete_this_todo}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 200
     else:
         json_payload["msg"] = f"Todo not exist with id : {todo_id}"
-        return jsonify(json_payload)
+        return jsonify(json_payload), 404
 
