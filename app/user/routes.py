@@ -21,7 +21,7 @@ def signup():
         json_payload["msg"] = f"New user created : {new_user}"
         return jsonify(json_payload)
 
-@user.route('/delete', methods=['POST'])
+@user.route('/delete', methods=['DELETE'])
 def delete():
     data = request.json
     json_payload = {}

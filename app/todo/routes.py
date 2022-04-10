@@ -15,14 +15,19 @@ def add():
     json_payload['msg'] = f"New todo added : {new_todo}"
     return jsonify(json_payload)
 
-@todo.route('/list', methods=["POST"])
+@todo.route('/list', methods=["GET"])
 def list():
     data = request.json
     json_payload = {}
     user = User.query.filter(User.id == data['user_id']).first()
-    json_payload['todos'] = []
-    for todo in user.todos:
-        json_payload['todos'].append(todo.toJson())
+    if user:
+        json_payload['todos'] = []
+        for todo in user.todos:
+            json_payload['todos'].append(todo.toJson())
+        json_payload['msg'] = f'Todos fetched from {user}'
+    else:
+        json_payload['todos'] = []
+        json_payload['msg'] = f'User not exist with id {data["user_id"]}'
     return jsonify(json_payload)
 
 @todo.route('/<int:todo_id>', methods=['GET'])
@@ -37,22 +42,7 @@ def get(todo_id):
         json_payload['msg'] = f"Todo not exist with id : {todo_id}"
         return jsonify(json_payload)
 
-
-
-@todo.route('/<int:todo_id>/delete', methods=['GET'])
-def delete(todo_id):
-    json_payload = {}
-    delete_this_todo = Todo.query.filter(Todo.id == todo_id).first()
-    if delete_this_todo:
-        delete_this_todo.delete()
-        delete_this_todo.commit()
-        json_payload["msg"] = f"Todo deleted : {delete_this_todo}"
-        return jsonify(json_payload)
-    else:
-        json_payload["msg"] = f"Todo not exist with id : {todo_id}"
-        return jsonify(json_payload)
-
-@todo.route('/<int:todo_id>/update', methods=['POST'])
+@todo.route('/<int:todo_id>/update', methods=['PUT'])
 def update(todo_id):
     data = request.json
     json_payload = {}
@@ -69,3 +59,18 @@ def update(todo_id):
     else:
         json_payload["msg"] = f"Todo not exist with id : {todo_id}"
         return jsonify(json_payload)
+
+
+@todo.route('/<int:todo_id>/delete', methods=['DELETE'])
+def delete(todo_id):
+    json_payload = {}
+    delete_this_todo = Todo.query.filter(Todo.id == todo_id).first()
+    if delete_this_todo:
+        delete_this_todo.delete()
+        delete_this_todo.commit()
+        json_payload["msg"] = f"Todo deleted : {delete_this_todo}"
+        return jsonify(json_payload)
+    else:
+        json_payload["msg"] = f"Todo not exist with id : {todo_id}"
+        return jsonify(json_payload)
+

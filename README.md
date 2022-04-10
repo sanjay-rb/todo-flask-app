@@ -1,5 +1,10 @@
 # Todo-Flask-App
 
+C -> POST
+R -> GET
+U -> PUT
+D -> DELETE
+
 ## User
 
 ### Signup
@@ -11,7 +16,7 @@ o/p -> user_is, msg
 
 ### Delete
 ```
-.com/user/delete -> post
+.com/user/delete -> delete
 i/p - user_id
 o/p -> msg
 ```
